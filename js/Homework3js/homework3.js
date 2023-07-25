@@ -15,7 +15,7 @@ const parsedHours = parseInt(hours);
 
 
 // Перевіримо, чи введене значення є числом і не NaN
-if (!isNaN(parsedHours)) {
+if (!iNaNs(parsedHours)) {
   // Порахуємо кількість секунд у цій кількості годин
   const secondsInHour = parsedHours * 3600; // 1 година = 3600 секунд
 
