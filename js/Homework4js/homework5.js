@@ -4,6 +4,8 @@ let userAnswerSecondary = parseInt(prompt("input secondary number?"));
 
 if (userAnswerFirst > userAnswerSecondary) {
   console.log(`MORE FIRST:${userAnswerFirst}`);
-} else {
+} else if( userAnswerFirst < userAnswerSecondary) {
   console.log(`MORE SECONDARY: ${userAnswerSecondary}`);
+}else{
+  console.log(`they are equal`);
 }
