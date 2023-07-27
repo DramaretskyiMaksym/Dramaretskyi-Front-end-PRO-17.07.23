@@ -9,6 +9,7 @@ const questionBasketball = 'Круто! Хочеш стати Майклом Д�
 let userBirth = +prompt('Твій рік народження?');
 let currentYear = 2023 - userBirth;
 let substituteYear = "Твій вiк " + currentYear;
+
 switch(currentYear){
   case 2023:
     substituteYear = dataRefusal;
@@ -16,6 +17,7 @@ switch(currentYear){
 
 let userCity = prompt('В якому місті ти живеш?');
 let substituteCity;
+
 switch(userCity){
   case null:
     substituteCity = cityRefusal;
@@ -58,50 +60,5 @@ switch(userSport){
     substituteSport = "Твiй спорт " + userSport;
 }
 
-switch (userCity){
-  case 'Київ', 'київ':
-    switch (userSport){
-      case 'Бокс', 'бокс':
-        alert(substituteYear + "\n" + "Ти живеш у столиці України" + "\n" + questionBoxing );
-        break;
-      case 'Футбол', 'футбол':
-        alert(substituteYear + "\n" + "Ти живеш у столиці України" + "\n" + questionFootball );
-        break;
-      case 'Баскетбол', 'баскетбол':
-        alert(substituteYear + "\n" + "Ти живеш у столиці України" + "\n" + questionBasketball );
-        break;
-      default:
-        alert(substituteYear + "\n" + substituteCity + "\n" + substituteSport);
-    }
-    break;
-  case 'Лондон', 'лондон':
-    switch (userSport){
-      case 'Бокс', 'бокс':
-        alert(substituteYear + "\n" + "Ти живеш у столиці Англії" + "\n" + questionBoxing );
-        break;
-      case 'Футбол', 'футбол':
-        alert(substituteYear  + "\n" + "Ти живеш у столиці Англії" + "\n" + questionFootball );
-        break;
-      case 'Баскетбол', 'баскетбол':
-        alert(substituteYear + "\n" + "Ти живеш у столиці Англії" + "\n" + questionBasketball );
-        break;
-      default:
-        alert(substituteYear + "\n" + substituteCity + "\n" + substituteSport);
-    }
-    break;
-  case 'Вашингтон', 'вашингтон':
-    switch (userSport){
-      case 'Бокс', 'бокс':
-        alert(substituteYear + "\n" + "Ти живеш у столиці США" + "\n" + questionBoxing );
-        break;
-      case 'Футбол', 'футбол':
-        alert(substituteYear + "\n" + "Ти живеш у столиці США" + "\n" + questionFootball );
-        break;
-      case 'Баскетбол', 'баскетбол':
-        alert(substituteYear+ "\n" + "Ти живеш у столиці США" + "\n" + questionBasketball );
-        break;
-    }
-    break;
-  default:
-    alert(substituteYear + "\n"+ substituteCity + "\n" + substituteSport);
-}
+
+alert(substituteYear + "\n" + substituteCity + "\n" + substituteSport);
