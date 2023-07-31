@@ -14,8 +14,8 @@ function isPrime(number) {
   return true;
 }
 
-const inputNumber = parseInt(prompt("Введите челое число"));
-const result = isPrime(inputNumber);
+const inputNumber = parseInt(prompt("Введите число")); // Ваше число для перевірки
+const result = isPrime(Math.abs(inputNumber));
 
 if (result) {
   console.log(`${inputNumber} є простим числом.`);
