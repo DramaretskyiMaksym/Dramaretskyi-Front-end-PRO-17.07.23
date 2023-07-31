@@ -18,17 +18,3 @@
 // } else {
 //   console.log(`${number} не є дзеркальним числом.`);
 // }
-
-
-//Яке повідомлення побачимо у консолі під час виконання наступного коду?
-let value = 'x';
-switch(value) {
-     case '*':
-         console.log('first');
-         break;
-     case 'X':
-         console.log('second');
-     case 'x':
-         console.log('third');
-         break;
-}
