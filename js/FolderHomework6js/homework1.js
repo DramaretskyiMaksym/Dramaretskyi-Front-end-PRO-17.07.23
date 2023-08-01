@@ -1,10 +1,13 @@
 //Вивести на сторінку в один рядок через кому числа від 10 до 20
-let result = "";
-for (let i = 10; i <= 20; i++) {
-  result += i;
-  if (i < 20) {
-    result += ", ";
-  }
+let step = 10;
+let step2 = 20;
+let numberString = "";
+
+for(step; step <= step2; step++){
+  numberString += step;
+  if(step < step2){
+    numberString += ", "
+}
 }
 
-console.log(result);
+console.log(numberString);
