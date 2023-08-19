@@ -1,6 +1,6 @@
 //Створити масив, довжину та елементи якого задає користувач. Потім відсортувати масив за зростанням. Потім видалити елементи з масиву з 2 по 4 (включно). У міру змін виводити вміст масиву на сторінку.
 
-let arr = [];
+let arra = [];
 
 let number = parseInt(prompt(" input length arr"));
 
@@ -8,10 +8,10 @@ for (let i = 0; i < number; i++){
   let digit = parseInt(prompt("input number #" + (i+1)));
   arr.push(digit);
 }
-const sortedNumbers = [].concat(arr).sort((a, b) => a - b);
+const sortedNumbers = [].concat(arra).sort((a, b) => a - b);
 
 document.write("<p>"+ "arr big" + sortedNumbers + "</p>");
-document.write("<p>" + "arr то что ввел пользователь"+ arr  + "</p>");
+document.write("<p>" + "arr то что ввел пользователь"+ arra  + "</p>");
 
 sortedNumbers.splice(1, 3);
 
@@ -19,7 +19,7 @@ document.write("<p>"+ " Удаленные элементы в массиве с
 
 
 //Дано масив [16,-37,54,-4,72,-56,47,4,-16,25,-37,46,4,-51,27,-63,4,-54,76,-4,12,-35,4,47]
-const arrr = [16,-37,54,-4,72,-56,47,4,-16,25,-37,46,4,-51,27,-63,4,-54,76,-4,12,-35,4,47]
+const arr = [16,-37,54,-4,72,-56,47,4,-16,25,-37,46,4,-51,27,-63,4,-54,76,-4,12,-35,4,47]
 
 //Знайти суму та кількість позитивних елементів.
 let sum = 0;
@@ -27,7 +27,7 @@ let positiveCount = 0;
 
 for (let i = 0; i < arr.length; i++) {
   if (arr[i] > 0) {
-    sum += arrr[i];
+    sum += arr[i];
     positiveCount++;
   }
 }
@@ -147,30 +147,24 @@ console.log("Добуток позитивних елементів:", positiveP
 
 
 
-
-
-
-
-
-
 //Знайти найбільший серед елементів масиву, решту занулити.
 let maxElement1 = array[0];
 let maxIndex1 = 0;
 
-for (let i = 1; i < arr.length; i++) {
+for (let i = 1; i < array.length; i++) {
   if (arr[i] > maxElement1) {
     maxElement1 = arr[i];
     maxIndex1 = i;
   }
 }
     // Занулення решти елементів
-for (let i = 0; i < arr.length; i++) {
+for (let i = 0; i < array.length; i++) {
   if (i !== maxIndex1) {
     arr[i] = 0;
   }
 }
 
-console.log("Масив після занулення:", arr);
+console.log("Масив після занулення:", array);
 
 
 
