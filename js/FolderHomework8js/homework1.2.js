@@ -38,7 +38,7 @@ for (let i = 0; i < arr12.length; i++) {
     minIndexxx = i;
   }
 
-  if (num > maxElement) {
+  if (num > maxElementtt) {
     maxElementtt = num;
     maxIndexxx = i;
   }
