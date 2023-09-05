@@ -4,25 +4,24 @@ function showProducts() {
   }
 }
 
-function calculateDiscount() {
-
-  let selectedProduct;
+let selectedProduct;
+function getProductNumber(){
   let productNumber;
-  function getProductNumber(){
-    do {
-      productNumber = parseInt(prompt('Enter product number which you wanna buy:'));
-    } while (productNumber < 1 || productNumber > products.length || isNaN(productNumber));
-    selectedProduct = products[productNumber - 1];
-  }
-  getProductNumber();
+  do {
+    productNumber = parseInt(prompt('Enter product number which you wanna buy:'));
+  } while (productNumber < 1 || productNumber > products.length || isNaN(productNumber));
+  selectedProduct = products[productNumber - 1];
+}
 
-  
-  let productsAmount;
-  function getProductAmount(){
-    do {
-      productsAmount = parseInt(prompt('Enter products amount:'));
-    } while (productsAmount < 1 || isNaN(productsAmount));
-    
+let productsAmount;
+function getProductAmount(){
+  do {
+    productsAmount = parseInt(prompt('Enter products amount:'));
+  } while (productsAmount < 1 || isNaN(productsAmount));
+}
+
+
+function calculationFinalPriceDiscount() {
     let initialPrice = selectedProduct.price * productsAmount;
     console.log('Price: $', initialPrice);
     
@@ -31,5 +30,3 @@ function calculateDiscount() {
       console.log('Congrats! You got a discount, the final price is $' + finalPrice);
     }
   }
-  getProductAmount();
-}

@@ -3,4 +3,6 @@ const discount = 10;
 const discountValue = (100 - discount) / 100;
 
 showProducts();
-calculateDiscount();
+getProductNumber();
+getProductAmount();
+calculationFinalPriceDiscount();
