@@ -4,5 +4,5 @@ const discountValue = (100 - discount) / 100;
 
 showProducts();
 getProductNumber();
-getProductAmount();
+productsAmount();
 calculationFinalPriceDiscount();

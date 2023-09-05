@@ -6,23 +6,22 @@ function showProducts() {
 
 let selectedProduct;
 function getProductNumber(){
-  let productNumber;
   do {
-    productNumber = parseInt(prompt('Enter product number which you wanna buy:'));
-  } while (productNumber < 1 || productNumber > products.length || isNaN(productNumber));
-  selectedProduct = products[productNumber - 1];
+    let = valueNumber = parseInt(prompt('Enter product number which you wanna buy:'));
+  } while (valueNumber < 1 || valueNumber > products.length || isNaN(valueNumber ));
+  selectedProduct = products[valueNumber - 1];
 }
 
-let productsAmount;
-function getProductAmount(){
+
+let productsAmount = function (){
   do {
-    productsAmount = parseInt(prompt('Enter products amount:'));
-  } while (productsAmount < 1 || isNaN(productsAmount));
+    valueAmount = parseInt(prompt('Enter products amount:'));
+  } while (valueAmount < 1 || isNaN(valueAmount));
 }
 
 
 function calculationFinalPriceDiscount() {
-    let initialPrice = selectedProduct.price * productsAmount;
+    let initialPrice = selectedProduct.price * valueAmount;
     console.log('Price: $', initialPrice);
     
     if (initialPrice >= startDiscountFrom) {
