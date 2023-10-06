@@ -14,8 +14,8 @@ function removeCharacters(inputString, charactersToRemove) {
 }
 
 // Запрос данных у пользователя
-const inputString = prompt('Введите строку:');
-const charactersToRemove = prompt('Введите символы для удаления (без разделителей):').split('');
+const inputString = prompt('Введи строку:');
+const charactersToRemove = prompt('Введи символы для удаления (без разделителей):').split('');
 
 // Вызов функции и вывод результата
 const charactersResult = removeCharacters(inputString, charactersToRemove);
