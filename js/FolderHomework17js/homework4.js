@@ -4,19 +4,16 @@
 Вивести зображення з цієї папки отримане випадковим чином (Math.random)
 */
 
-const image = document.getElementById('image');
+const image = document.getElementById ('image');
 const loadImageButton = document.getElementById('loadImage');
-const imageCount = 9; // Загальна кількість фотографій
-const imagesFolder = './image/'; // Вкажіть шлях до папки з фотографіями на сервері
+const imageCount = 9; 
+const imagesFolder = './images/';
 
 loadImageButton.addEventListener('click', function() {
-    // Генеруємо випадковий номер фотографії
     const randomNumber = Math.floor(Math.random() * imageCount) + 1;
-
-    // Формуємо URL випадкової фотографії
     const imageUrl = imagesFolder + randomNumber + '.jpeg';
-
-    // Встановлюємо URL фотографії
     image.src = imageUrl;
+    image.style.height = '500px';
+    image.style.width = '600px';
 });
 
