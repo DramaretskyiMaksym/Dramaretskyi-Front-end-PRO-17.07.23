@@ -5,6 +5,7 @@ const numberOfDigits = 10;
 
 document.getElementById('table').addEventListener('click', function(){
   const createElement = document.getElementById('createElement');
+  
   for (let i = 1; i <= numberOfDigits; i++) {
       const row = document.createElement('tr');
       for (let j = 1; j <= numberOfDigits; j++) {

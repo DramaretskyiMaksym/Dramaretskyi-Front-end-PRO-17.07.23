@@ -11,6 +11,7 @@ document.getElementById('getLinkUser').addEventListener('click', function(){
 
   if(userLink){
     clickLinkUser.style.display = 'block'
+    
     if(!userLink.startsWith('http://') && !userLink.startsWith('https://')){
       docu = 'https://' + userLink;
       userLinkSaved = docu;
