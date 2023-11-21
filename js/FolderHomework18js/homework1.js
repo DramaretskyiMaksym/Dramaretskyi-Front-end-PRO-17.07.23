@@ -38,7 +38,7 @@ showList.addEventListener('click', function() {
       generateList(data, wrapperList);
   }
 
-  isOpen = !isOpen; 
+  isOpen = !isOpen;
 });
 
 
