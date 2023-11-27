@@ -116,3 +116,50 @@ button{
   background-color: rgb(0, 0, 233);
   padding: 8px 30px;
 }
+
+form {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 20%;
+  margin-right: 20%;
+  border: 2px solid red;
+  border-radius: 10px;
+}
+form p {
+  text-align: center;
+}
+form select {
+  display: block;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#parentElementDiv div {
+  display: block;
+  color: red;
+  border-radius: 2px solid red;
+}
+
+#showResultatForm {
+  display: none;
+  align-items:flex-start;
+  margin: 100px;
+  justify-content: center ;
+  flex-direction: column;
+  border-radius: 2px;
+  border-color: red;
+  padding: 25px;
+  background-color:beige;
+  border: 2px solid rgb(119, 5, 110);
+  border-radius: 2px;
+}
+
+#showResultatForm span{
+  color: rgb(0, 8, 255);
+  font-weight: bold;
+  font-family:'Times New Roman', Times, serif;
+}
+#showResultatForm strong {
+  color: black;
+}
