@@ -1,3 +1,19 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  margin: auto;
+  font-family: 'Inter', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Roboto', sans-serif;
+}
+
+:root {
+  --myColor: blue; /* Начальное значение переменной */
+}
 .block{
   display: flex;
   flex-direction: column;
@@ -17,15 +33,13 @@
   color: blue;
   border: 1px solid blue;
   margin-bottom: 60px;
-  max-width: 150px;
+  max-width: 136px;
 }
-
 
 .btnUser{
   display: flex;
   gap: 50px;
 }
-
 
 #getLinkUser,#table{
   background-color:blue;
@@ -40,8 +54,8 @@
     color: blue;
     border: 1px solid blue;
   }
-  
 }
+
 #clickLinkUser{
   background-color: white;
   border-radius: 10px;
@@ -56,7 +70,6 @@
     border-color: white;
   }
 }
-
 
 #table {
   width: 300px;
@@ -99,40 +112,221 @@ td {
 #main {
   display: flex;
   gap: 10px;
+  padding: 10px;
 }
 
-#main div {
-  flex-basis: 30%;
+#left {
+  padding: 10px;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+  div {
+    padding: 20px 40px;
+    display: block;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+      &:after {
+        background-color:blue; /* Цвет линии при наведении на нее курсора мыши */
+        display: block;
+        content: "";
+        height: 2px; /* Высота линии */
+        width: 0%;
+        -webkit-transition: width .3s ease-in-out;
+        -moz--transition: width .3s ease-in-out;
+        transition: width .3s ease-in-out;
+      }
+      &:hover:after{
+        cursor: pointer;
+        width: 100%;
+        background-color:blue;
+      }
+  }
+}
+
+#center{
+  display: none;
+  padding: 10px;
+  border: none;
+  border-radius: 22px;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+  div {
+    padding: 20px 40px;
+    display: block;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+      &::after {
+        background-color: blue; /* Цвет линии при наведении на нее курсора мыши */
+        display: block;
+        content: "";
+        height: 2px; /* Высота линии */
+        width: 0%;
+        -webkit-transition: width .3s ease-in-out;
+        -moz--transition: width .3s ease-in-out;
+        transition: width .3s ease-in-out;
+      }
+      &:hover:after{
+        cursor: pointer;
+        width: 100%;
+        background-color: blue;
+      }
+    }
+}
+
+
+#right {
+  display: none;
+  padding: 10px;
+  border: none;
+  border-radius: 22px;
+  max-width: 540px;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+  div {
+    padding: 10px 10px;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    display: grid;
+    gap: 10px 10px;
+    }
+    span {
+      color: green;
+      font-weight: 600;
+    }
+    string {
+      font-weight: 400;
+    }
+}
+
+/* #main div {
   border: 1px solid blue;
   min-height: 50px;
   border-radius: 10px;
-}
+} */
 
 button{
-  display: flex;
-  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
   border-radius: 20px;
   color: white;
   background-color: rgb(0, 0, 233);
+  padding: 8px 20px;
+  cursor: pointer;
+  &:hover {
+    background-color: #ffffff;
+    border: 1px solid blue;
+    color: black;
+  }
+}
+
+.button-order{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  border-radius: 20px;
+  color: white;
+  background-color: rgb(5, 5, 236);
   padding: 8px 30px;
+  max-width: 300px;
+  margin: 0px auto;
+  cursor: pointer;
+  &:hover {
+    color: black;
+    background-color: white;
+    border: 1px solid blue;
+  }
 }
 
 form {
-  display: flex;
+  display: none;
+  max-width: 508px;
   flex-direction: column;
   position: relative;
-  margin-left: 20%;
-  margin-right: 20%;
-  border: 2px solid red;
+  text-align: center;
+  align-items: center;
+  margin-left: 34%;
+  margin-right: 0%;
+  bottom: 200px;
+  padding: 40px;
   border-radius: 10px;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  h2 {
+    text-transform: uppercase;
+    margin: 0px 0px 22px 0px;
+  }
+  input{
+    display: flex;
+    border-radius: 22px;
+    border: 1px solid #ebe4e4;
+    padding: 10px 20px;
+    min-width: 400px;
+    margin-bottom: 30px;
+  }
 }
+/* .required-label {
+  display: inline-block;
+  margin-right: 136px;
+  margin-bottom: 4px;
+} */
+.required-label::after {
+  content: " *";
+  top: 10px;
+  color: red;
+}
+
+.required-label-select::after {
+  content: " *";
+  top: 10px;
+  color: red;
+}
+
+.required-label-number p::after {
+  content: " *";
+  top: 10px;
+  color: red;
+}
+
+.required-label-choose{
+  display: inline-block;
+  margin-right: 170px;
+  margin-bottom: 4px;
+}
+.required-label-choose::after {
+  content: " *";
+  top: 10px;
+  color: red;
+}
+
+.required-label-quantity{
+  display: inline-block;
+  margin-right: 220px;
+  margin-bottom: 4px;
+}
+
+.required-label-quantity::after{
+  content: " *";
+  top: 10px;
+  color: red;
+}
+
 form p {
+  display: flex;
   text-align: center;
 }
+
 form select {
   display: block;
-  margin-left: 20px;
-  margin-right: 20px;
+  padding: 10px 152px;
+  border: 1px solid #ebe4e4;
+  border-radius: 22px;
+  color: green;
+  font-weight: 400;
+  margin-bottom: 30px;
 }
 
 #parentElementDiv div {
@@ -148,18 +342,70 @@ form select {
   justify-content: center ;
   flex-direction: column;
   border-radius: 2px;
-  border-color: red;
-  padding: 25px;
-  background-color:beige;
-  border: 2px solid rgb(119, 5, 110);
-  border-radius: 2px;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0px -5px 10px 0px rgba(0, 0, 0, 0.5);
 }
 
 #showResultatForm span{
-  color: rgb(0, 8, 255);
-  font-weight: bold;
   font-family:'Times New Roman', Times, serif;
+  color:black;
+  font-size: 22px;
+  font-weight: 600;
+  &:nth-child(2){
+    margin-bottom: 30px;
+  }
 }
-#showResultatForm strong {
-  color: black;
+
+
+#showResultatForm string {
+  color: green;
+  font-size: 18px;
+
+}
+
+#showResultatForm span {
+  color: #000000;
+}
+
+#showResultatForm div {
+  color: green;
+}
+
+#titleForm {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom:30px;
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.radioButton{
+  display: flex;
+  min-width: 40px;
+
+  
+}
+.radioMainBlock {
+  display: flex;
+  align-items: baseline;
+  margin-right: 200px;
+  margin-bottom: 10px;
+  input {
+    color: green;
+  }
+}
+
+textarea {
+  width: 400px;
+  height: 90px;
+  resize: none;
+  margin-bottom: 30px;
+}
+
+#validationMessage {
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  /* display: none; */
 }
