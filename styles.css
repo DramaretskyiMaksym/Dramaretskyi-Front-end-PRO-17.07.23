@@ -268,29 +268,60 @@ form {
     margin-bottom: 30px;
   }
 }
-/* .required-label {
+
+.required-label{
+  margin-right: 130px;
+}
+
+
+.allowed {
+  border: 1px solid green;
+
+}
+
+.allowedActivetitle{
+  margin-right: 330px;
+  color: green;
+}
+.required-label-number{
   display: inline-block;
-  margin-right: 136px;
-  margin-bottom: 4px;
+  margin-right: 0px;
+}
+
+
+.userNameValueErrorInvalidInput{
+  color: red;
+  margin-right: 48px;
+}
+
+.userNameValueErrorMinFiveLetter{
+  color: red;
+  margin-right: 200px;
+}
+
+/* .invalid-element{
+  color: red;
+  margin-right: 200px;
 } */
 .required-label::after {
   content: " *";
   top: 10px;
   color: red;
 }
-
+.required-label-select{
+  color: #000000;
+}
 .required-label-select::after {
   content: " *";
   top: 10px;
   color: red;
 }
 
-.required-label-number p::after {
+.required-label-number::after {
   content: " *";
   top: 10px;
   color: red;
 }
-
 .required-label-choose{
   display: inline-block;
   margin-right: 170px;
@@ -305,8 +336,16 @@ form {
 .required-label-quantity{
   display: inline-block;
   margin-right: 220px;
+  color: #000000;
   margin-bottom: 4px;
 }
+
+.titleChError{
+  display: block;
+  color: red;
+  margin-right: 128px;
+}
+
 
 .required-label-quantity::after{
   content: " *";
@@ -408,4 +447,23 @@ textarea {
   color: rgb(0, 0, 0);
   display: inline-block;
   /* display: none; */
+}
+
+
+.validationMessageUserCity{
+  display: block;
+  margin-right: 298px;
+}
+.validationMessageUserCityError{
+  color: red;
+  margin-right: 206px;
+}
+.validationMessageUserCityAllowed{
+  color: green;
+  margin-right: 330px;
+}
+
+#validationMessageUserName.active{
+  color: green;
+  margin-right: 338px;
 }

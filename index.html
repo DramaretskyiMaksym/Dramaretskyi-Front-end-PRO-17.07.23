@@ -84,12 +84,13 @@
   <div id = "showResultatForm">
     <h2 id = 'titleForm'></h2>
   </div>
+
   <form name="mainForm" onsubmit="return validateForm()">
     <h2>Form order</h2>
     <label id = "validationMessageUserName" for="username" class="required-label">Enter your full name for bay, please!</label>
     <input type="text" id = "username" name="nameUser" placeholder="Write here" required/>
 
-    <label id = "validationMessageUserCity" for="username" class="required-label-select">Select a city</label>
+    <label id = "validationMessageUserCity"  for="username" class="required-label-select">Select a city</label>
     <select name="citys" required>
       <option type="select" name="city" value="0">--select city--</option>
       <option type="select" name="city" value="Odessa">Odessa</option>
@@ -100,8 +101,8 @@
     </select>
 
     
-    <label for="username" class="required-label-number"><p  id="validationMessageMail">Enter your number mail</p></label>
-    <p><input type="number" name="numberMail" placeholder="Write here" required></p>
+    <label for="username" class="required-label-number" id = "checkMailNumber">Enter your number mail</label>
+    <p><input type="number" name="numberMail" placeholder="Write here" id="validationMessageMail" required></p>
 
     <label for="username" class="required-label-choose">Choose your payment method</label>
     <p class="radioMainBlock">
@@ -109,8 +110,8 @@
       <input type="radio" class="radioButton" name="pay" value="bankcard" required/> Bank card
     </p>
 
-    <label for="username" class="required-label-quantity">Select quantity of goods</label>
-    <p> <input type="number" name="numberQuantity" placeholder="Write here" required></p>
+    <label for="username" class="required-label-quantity " id = "titleChError">Select quantity of goods</label>
+    <p> <input type="number" name="numberQuantity" placeholer="Write here" id="goodsSelectQuantity" required></p>
     <textarea id="comment" name="commet" placeholder="input your comment" ></textarea>
     
     <button type = 'button' id="btn">button save</button>

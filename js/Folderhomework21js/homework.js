@@ -22,11 +22,9 @@ function showProducts(products, category){
     element.textContent = `${product.name} $ ${product.price}`;
     element.setAttribute('data-product', product.id);
     element.setAttribute('data-category', category);
-
     parentElement.appendChild(element);
   }
 }
-
 
 
 let isRightBlockOpen = false;
@@ -103,69 +101,124 @@ document.getElementById('left').addEventListener('click', event => {
   }
 });
 
-validationMessageUserName.style.display = 'inline-block';
-validationMessageUserName.style.marginRight = '136px';
 
-validationMessageUserCity.style.display = 'inline-block';
-validationMessageUserCity.style.marginRight = '300px';
-
-
-validationMessageMail.style.display = 'inline-block';
-validationMessageMail.style.marginRight = '220px';
 
 
 //Валидность
 function validateForm() {
   const formElements = document.forms.mainForm.elements;
-  const fullName = formElements.nameUser.value.trim();
-  if (fullName.length < 5) {
-    validationMessageUserName.style.color = 'red';
-    validationMessageUserName.style.marginRight = '88px';
-    validationMessageUserName.innerText = `The name must contain more than 5 words`
-    return false;
-  }
+
+  // const fullName = formElements.nameUser.value.trim();
+  const fullName = document.getElementById('username');
+
+  if (fullName) {
+    const fullNameValueValid = username.value.trim();
+    if (fullNameValueValid.length < 5){
+      validationMessageUserName.classList.add('userNameValueErrorMinFiveLetter');
+      validationMessageUserName.innerText = 'Please, input  more 5 letter'
+      return false
+    }
+    if (fullNameValueValid.match(/^A-Za-z]5+/) || fullNameValueValid === '') {
+      validationMessageUserName.innerText = 'Invalid input. Please enter only letters for name.';
+      validationMessageUserName.classList.remove('userNameValueErrorMinFiveLetter');
+      validationMessageUserName.classList.add('userNameValueErrorInvalidInput');
+      return;
+      }
+    if (/[0-9]+/.test(fullNameValueValid) || fullNameValueValid === '') {
+      fullName.classList.add('invalid-element');
+      validationMessageUserName.innerText = 'Invalid input. Please enter only letters for name.';
+      validationMessageUserName.classList.remove('userNameValueErrorMinFiveLetter');
+      validationMessageUserName.classList.add('userNameValueErrorInvalidInput');
+      return;
+    }
+    validationMessageUserName.classList.remove('userNameValueErrorInvalidInput');
+    validationMessageUserName.innerText = `Allowed`;
+
+    validationMessageUserName.classList.remove('required-label');
+    validationMessageUserName.classList.add('allowedActivetitle');
+    username.classList.add('allowed');
+  } else {
+      validationMessageUserName.classList.add('userNameValueError');
+      validationMessageUserName.innerText = 'Element with id "nameInput" not found.';
+    }
+
 
 
 
   if (formElements.citys.value === '0') {
     validationMessageUserCity.innerText = `You haven’t chosen a city`;
-    validationMessageUserCity.style.marginRight = '214px';
-    validationMessageUserCity.style.color = 'red';
+    validationMessageUserCity.classList.remove('validationMessageUserCity');
+    validationMessageUserCity.classList.add('validationMessageUserCityError')
     return false;
+  } else {
+    formElements.citys.classList.add('allowed');
+    validationMessageUserCity.innerText = 'Allowed';
+    validationMessageUserCity.classList.remove('required-label-select');
+    validationMessageUserCity.classList.add('validationMessageUserCityAllowed');
   }
 
-  if (!formElements.numberMail.checkValidity()) {
-    alert('Please enter a valid number for MAIL*.');
-    return false;
+
+  //FormaValidUserMailNumber
+  const quantityMailValue = document.getElementById('validationMessageMail');
+  if (quantityMailValue){
+    const inputValueMail = quantityMailValue.value.trim();
+    if(inputValueMail.match(/^-/) || isNaN(inputValueMail) || inputValueMail === '' || inputValueMail === '0' || inputValueMail.startsWith('0')){
+      // alert('Invalid input. Please enter a positive number.');
+
+      checkMailNumber.classList.add('invalid-element');
+      checkMailNumber.innerText = `Invalid input. Please enter only digits`;
+      return;
+    }
+    const numberRegex = /^\d+$/;
+
+    if (numberRegex.test(inputValueMail)) {
+      username.classList.add('allowed');
+    } else {
+      alert('Invalid input. Please enter only digits.');
+    }
+    checkMailNumber.innerText = `Allowed`;
+    validationMessageMail.classList.add('allowed');
+  } else {
+    alert('Element with id "numberInput" not found.');
   }
 
-  const quantityMailValue = parseInt(formElements.numberMail.value, 10);
 
-  if (isNaN(quantityMailValue) || quantityMailValue <= 0) {
-    validationMessageMail.style.color = 'red';
-    validationMessageMail.style.marginRight = '118px';
-    validationMessageMail.innerText = `Input is a positive number and not  "${formElements.numberMail.value}"`
-    return false;
-  }
 
+  //FormaValidUserPayPoint
   const paymentMethod = formElements.pay.value;
+
   if (!paymentMethod) {
     alert('Please choose a payment method.');
     return false;
   }
 
-  if (!formElements.numberQuantity.checkValidity()) {
-    alert('Please enter a valid quantity.');
-    return false;
-  }
-  const quantityValue = parseInt(formElements.numberQuantity.value, 10);
-  if (isNaN(quantityValue) || quantityValue <= 0) {
-    alert(`Please enter a valid  "${formElements.numberQuantity.value}"  non-negative quantity of Goods*.`);
-    return false;
-  }
+  const goodsSelectQuantityValue = document.getElementById('goodsSelectQuantity');
+  if (goodsSelectQuantityValue){
+    const inputValueGoods = goodsSelectQuantityValue.value.trim();
+    if(inputValueGoods.match(/^-/) || isNaN(inputValueGoods) || inputValueGoods === '' || inputValueGoods === '0' || inputValueGoods.startsWith('0')){
 
-  return true;
+      titleChError.classList.add('titleChError')
+      titleChError.innerText = `Invalid input. Please enter only digits`;
+      return;
+    }
+    const numberRegex = /^\d+$/;
+
+    if (numberRegex.test(inputValueGoods)) {
+      checkMailNumber.innerText = `Allowed`;
+      validationMessageMail.classList.add('allowed');
+    } else {
+      alert('Invalid input. Please enter only digits.');
+    }
+  } else {
+    alert('Element with id "numberInput" not found.');
+  }
 }
+
+
+
+
+
+
 
 
 
