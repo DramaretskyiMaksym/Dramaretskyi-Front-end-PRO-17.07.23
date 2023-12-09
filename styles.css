@@ -299,10 +299,10 @@ form {
   margin-right: 200px;
 }
 
-/* .invalid-element{
+.invalid-element{
   color: red;
   margin-right: 200px;
-} */
+}
 .required-label::after {
   content: " *";
   top: 10px;
@@ -466,4 +466,8 @@ textarea {
 #validationMessageUserName.active{
   color: green;
   margin-right: 338px;
+}
+.goodsSelectQuantity{
+  color: green;
+  margin-right: 320px;
 }

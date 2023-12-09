@@ -108,29 +108,33 @@ document.getElementById('left').addEventListener('click', event => {
 function validateForm() {
   const formElements = document.forms.mainForm.elements;
 
-  // const fullName = formElements.nameUser.value.trim();
-  const fullName = document.getElementById('username');
+  const fullName = formElements.nameUser;
 
   if (fullName) {
-    const fullNameValueValid = username.value.trim();
+    const fullNameValueValid = fullName.value.trim();
+
     if (fullNameValueValid.length < 5){
       validationMessageUserName.classList.add('userNameValueErrorMinFiveLetter');
       validationMessageUserName.innerText = 'Please, input  more 5 letter'
-      return false
+      username.classList.remove ('invalid-element')
+      return;
     }
     if (fullNameValueValid.match(/^A-Za-z]5+/) || fullNameValueValid === '') {
       validationMessageUserName.innerText = 'Invalid input. Please enter only letters for name.';
       validationMessageUserName.classList.remove('userNameValueErrorMinFiveLetter');
       validationMessageUserName.classList.add('userNameValueErrorInvalidInput');
+      username.classList.remove ('invalid-element')
       return;
-      }
+    }
     if (/[0-9]+/.test(fullNameValueValid) || fullNameValueValid === '') {
       fullName.classList.add('invalid-element');
       validationMessageUserName.innerText = 'Invalid input. Please enter only letters for name.';
       validationMessageUserName.classList.remove('userNameValueErrorMinFiveLetter');
       validationMessageUserName.classList.add('userNameValueErrorInvalidInput');
+      username.classList.remove('invalid-element')
       return;
     }
+
     validationMessageUserName.classList.remove('userNameValueErrorInvalidInput');
     validationMessageUserName.innerText = `Allowed`;
 
@@ -149,7 +153,7 @@ function validateForm() {
     validationMessageUserCity.innerText = `You haven’t chosen a city`;
     validationMessageUserCity.classList.remove('validationMessageUserCity');
     validationMessageUserCity.classList.add('validationMessageUserCityError')
-    return false;
+    return;
   } else {
     formElements.citys.classList.add('allowed');
     validationMessageUserCity.innerText = 'Allowed';
@@ -174,12 +178,13 @@ function validateForm() {
     if (numberRegex.test(inputValueMail)) {
       username.classList.add('allowed');
     } else {
-      alert('Invalid input. Please enter only digits.');
+      console.log('Invalid input. Please enter only digits.');
     }
     checkMailNumber.innerText = `Allowed`;
+    checkMailNumber.classList.remove('invalid-element');
     validationMessageMail.classList.add('allowed');
   } else {
-    alert('Element with id "numberInput" not found.');
+    console.log('Element with id "numberInput" not found.');
   }
 
 
@@ -188,39 +193,37 @@ function validateForm() {
   const paymentMethod = formElements.pay.value;
 
   if (!paymentMethod) {
-    alert('Please choose a payment method.');
-    return false;
+    console.log('Please choose a payment method.');
+    return;
   }
+
+
+
 
   const goodsSelectQuantityValue = document.getElementById('goodsSelectQuantity');
   if (goodsSelectQuantityValue){
     const inputValueGoods = goodsSelectQuantityValue.value.trim();
-    if(inputValueGoods.match(/^-/) || isNaN(inputValueGoods) || inputValueGoods === '' || inputValueGoods === '0' || inputValueGoods.startsWith('0')){
 
+    if(inputValueGoods.match(/^-/) || isNaN(inputValueGoods) || inputValueGoods === '' || inputValueGoods === '0' || inputValueGoods.startsWith('0')){
       titleChError.classList.add('titleChError')
-      titleChError.innerText = `Invalid input. Please enter only digits`;
+      titleChError.innerText = `!Invalid input. Please enter only digits`;
       return;
     }
-    const numberRegex = /^\d+$/;
 
-    if (numberRegex.test(inputValueGoods)) {
-      checkMailNumber.innerText = `Allowed`;
-      validationMessageMail.classList.add('allowed');
+    const numberRegexValue = /^\d+$/;
+
+    if (numberRegexValue.test(inputValueGoods)) {
+      titleChError.innerText = `Allowed`;
+      titleChError.classList.add('goodsSelectQuantity');
     } else {
-      alert('Invalid input. Please enter only digits.');
+      console.log('Invalid input. Please enter only digits.');
     }
   } else {
-    alert('Element with id "numberInput" not found.');
+    console.log('Element with id "numberInput" not found.');
   }
+
+  return true
 }
-
-
-
-
-
-
-
-
 
 //Форма
 function getCity (citys) {
@@ -238,17 +241,20 @@ function getCity (citys) {
 document.getElementById('btn').addEventListener('click', () => {
   const formElements = document.forms.mainForm.elements;
   const parentElementDiv = document.getElementById('showResultatForm');
+  console.log('click')
 
   function showAddAnswer(label, value,) {
     let spanElement = document.createElement('span');
     spanElement.innerHTML = `<h4>${label}:</h4><div>${value}</div>`;
     parentElementDiv.appendChild(spanElement);
   }
+  console.log('click 2');
 
   if (validateForm()){
     showResultatForm.style.display = 'flex';
     mainForm.style.display = 'none';
     btn.style.display = 'none';
+
     showAddAnswer('Order information', showInfoForForm);
   
     showAddAnswer('Full Name User', formElements.nameUser.value);
@@ -262,5 +268,6 @@ document.getElementById('btn').addEventListener('click', () => {
     showAddAnswer('Quantity', formElements.numberQuantity.value);
 
     showAddAnswer('Comment', formElements.commet.value);
+    console.log('click 3')
   }
 });
