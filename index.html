@@ -8,9 +8,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    #result {
+        white-space: wrap; /* чтобы текст не переносился на новую строку */
+    }
+</style>
 </head>
 <body>
-  <div id ="yes"></div>
   <!-- <div class="block">
     <input id = "elem" type="button" class="clickedBtn" value="Create element">
     <div id = "wrapper" ></div>
@@ -127,37 +131,31 @@
 
 
 
-
-
   <script>
-    // Переменная для сохранения строки с словами "да"
-    var yesWords = '';
+    // Функция для создания и добавления слова "да" в строку с задержкой
+    function addDaWithDelay(delay) {
+        // Создаем новый span элемент
+        var newSpan = document.createElement('span');
+        
+        // Устанавливаем текст внутри span
+        newSpan.textContent = 'да ';
 
-    // Функция для создания и добавления div с текстом "да"
-    function createDivWithText() {
-        // Добавляем слово "да" к строке
-        yesWords += 'да, ';
+        // Добавляем span к результату с задержкой
+        setTimeout(function() {
+            document.getElementById('result').appendChild(newSpan);
+        }, delay);
     }
 
-    // Создаем 10 div элементов с текстом "да"
+    // Задержка между появлением каждого слова
+    var delay = 10; // 1000 миллисекунд = 1 секунда
+
+    // Создаем 10 слов "да" с задержкой
     for (var i = 0; i < 10000; i++) {
-        createDivWithText();
+        addDaWithDelay(i * delay);
     }
-
-    // Удаляем последнюю запятую и пробел
-    yesWords = yesWords.slice(0, -2);
-
-    // Создаем новый div для вывода строки с словами "да"
-    var resultDiv = document.createElement('div');
-    resultDiv.textContent = yesWords;
-
-    // Добавляем div на страницу
-    document.body.appendChild(resultDiv);
 </script>
 
-
-
-
+<div id="result"></div>
 
 
 
