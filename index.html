@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Montserrat:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div id ="yes"></div>
   <!-- <div class="block">
     <input id = "elem" type="button" class="clickedBtn" value="Create element">
     <div id = "wrapper" ></div>
@@ -73,13 +74,16 @@
 
 <!--FolderHomework21js -->
 
-  <div id = "main">
+  <!-- <div id = "main">
     <div id = "left"></div>
     <div id = "center"></div>
     <div id = "right"></div>
   </div>
   <span id = "spanAllBuy"></span>
-
+  <div class="buttonShowClose">
+    <button type = 'button' id="showData">My Orders</button>
+    <button type = 'button' id="closeData">Сlose Orders</button>
+  </div>
 
   <div id = "showResultatForm">
     <h2 id = 'titleForm'></h2>
@@ -114,8 +118,8 @@
     <p> <input type="number" name="numberQuantity" placeholer="Write here" id="goodsSelectQuantity" required></p>
     <textarea id="comment" name="commet" placeholder="input your comment" ></textarea>
     
-    <button type = 'button' id="btn">button save</button>
-  </form>
+    <button type = 'button' id="btn" class="button">button save</button>
+  </form> -->
 
 
 
@@ -125,8 +129,31 @@
 
 
 
+  <script>
+    // Переменная для сохранения строки с словами "да"
+    var yesWords = '';
 
+    // Функция для создания и добавления div с текстом "да"
+    function createDivWithText() {
+        // Добавляем слово "да" к строке
+        yesWords += 'да, ';
+    }
 
+    // Создаем 10 div элементов с текстом "да"
+    for (var i = 0; i < 10000; i++) {
+        createDivWithText();
+    }
+
+    // Удаляем последнюю запятую и пробел
+    yesWords = yesWords.slice(0, -2);
+
+    // Создаем новый div для вывода строки с словами "да"
+    var resultDiv = document.createElement('div');
+    resultDiv.textContent = yesWords;
+
+    // Добавляем div на страницу
+    document.body.appendChild(resultDiv);
+</script>
 
 
 
@@ -196,7 +223,8 @@
   <!-- <script src="./js/FolderHomework19js/data.js"></script>
   <script src="./js/FolderHomework19js/homework1.js"></script> -->
   <!-- <script src="./js/FolderHomework20js/homeworkFormFirst.js"></script> -->
-  <script src="./js/Folderhomework21js/data.js"></script>
-  <script src="./js/Folderhomework21js/homework.js"></script>
+  <!-- <script src="./js/Folderhomework21js/data.js"></script>
+  <script src="./js/Folderhomework21js/homework.js"></script> -->
+  <script src= './yes/ys.js'></script>
 </body>
 </html>

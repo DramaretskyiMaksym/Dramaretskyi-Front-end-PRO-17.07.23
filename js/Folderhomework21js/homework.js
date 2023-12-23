@@ -144,10 +144,7 @@ function validateForm() {
   } else {
       validationMessageUserName.classList.add('userNameValueError');
       validationMessageUserName.innerText = 'Element with id "nameInput" not found.';
-    }
-
-
-
+  }
 
   if (formElements.citys.value === '0') {
     validationMessageUserCity.innerText = `You haven’t chosen a city`;
@@ -187,8 +184,6 @@ function validateForm() {
     console.log('Element with id "numberInput" not found.');
   }
 
-
-
   //FormaValidUserPayPoint
   const paymentMethod = formElements.pay.value;
 
@@ -196,8 +191,6 @@ function validateForm() {
     console.log('Please choose a payment method.');
     return;
   }
-
-
 
 
   const goodsSelectQuantityValue = document.getElementById('goodsSelectQuantity');
@@ -248,26 +241,81 @@ document.getElementById('btn').addEventListener('click', () => {
     spanElement.innerHTML = `<h4>${label}:</h4><div>${value}</div>`;
     parentElementDiv.appendChild(spanElement);
   }
-  console.log('click 2');
+    if (validateForm()){
+      // showResultatForm.style.display = 'flex';
+      mainForm.style.display = 'none';
+      btn.style.display = 'none';
+  
+      showAddAnswer('Order information', showInfoForForm);
+    
+      showAddAnswer('Full Name User', formElements.nameUser.value);
+    
+      showAddAnswer('City Usera', formElements.citys.value);
+    
+      showAddAnswer('Number mail User', formElements.numberMail.value);
+    
+      showAddAnswer('Pay', formElements.pay.value);
+    
+      showAddAnswer('Quantity', formElements.numberQuantity.value);
+  
+      showAddAnswer('Comment', formElements.commet.value);
+      console.log('click 3')
+    }
+  });
 
-  if (validateForm()){
+
+
+  closeData.style.display = 'none';
+  document.getElementById('showData').addEventListener('click', () => {
     showResultatForm.style.display = 'flex';
-    mainForm.style.display = 'none';
-    btn.style.display = 'none';
+    closeData.style.display = 'flex';
+  });
+  document.getElementById('closeData').addEventListener('click', () => {
+    showResultatForm.style.display = 'none';
+    closeData.style.display = 'none';
+  });
 
-    showAddAnswer('Order information', showInfoForForm);
-  
-    showAddAnswer('Full Name User', formElements.nameUser.value);
-  
-    showAddAnswer('City Usera', formElements.citys.value);
-  
-    showAddAnswer('Number mail User', formElements.numberMail.value);
-  
-    showAddAnswer('Pay', formElements.pay.value);
-  
-    showAddAnswer('Quantity', formElements.numberQuantity.value);
 
-    showAddAnswer('Comment', formElements.commet.value);
-    console.log('click 3')
-  }
-});
+
+
+// let tasks  = [categories];
+
+// function showTasks(){
+//   tasks.map((task, index) => showTask(task, index));
+//   //tasks.map(show)(эквивалентна запись), потому что метод map принимает колл бэк, вызывает его, передавая в качестве первого аргумента - task
+//   //В чем разница? ни в чем!
+// }
+
+// function showTask(task, index) {
+//   const parent = document.getElementById('tasks');
+//   const item = document.createElement('li');
+//   item.textContent = task;
+  
+//   const btn = document.createElement('button');
+//   btn.setAttribute('type', 'button');
+//   btn.textContent = 'X';
+//   btn.setAttribute('data-task-index', index);
+//   btn.addEventListener('click', () => {
+//     tasks.splice(index, 1);// При клике удаляем
+//     //Затем обновляем
+//     localStorage.setItem('ourTasks', JSON.stringify(tasks));
+//     item.remove();
+//   });
+
+//   item.appendChild(btn);
+//   parent.appendChild(item);
+// }
+
+// window.addEventListener('load', () => {
+//     // Если storedTasks равно null, используем пустой массив
+//   tasks = JSON.parse(localStorage.getItem('ourTasks')) || [];
+//   showTasks();
+
+// });
+
+// document.getElementById('btn').addEventListener('click', () => {
+//   const str = document.forms[0].str.value;
+//   tasks.push(str);
+//   showTask(str, tasks.length - 1);
+//   localStorage.setItem('ourTasks', JSON.stringify(tasks));
+// });

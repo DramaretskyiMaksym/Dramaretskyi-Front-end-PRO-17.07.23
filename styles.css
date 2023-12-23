@@ -198,14 +198,17 @@ td {
       font-weight: 400;
     }
 }
-
+.buttonShowClose{
+  display: flex;
+  gap: 10px;
+}
 /* #main div {
   border: 1px solid blue;
   min-height: 50px;
   border-radius: 10px;
 } */
 
-button{
+.button{
   display: none;
   align-items: center;
   justify-content: center;
