@@ -1,4 +1,16 @@
+let selectedProductQuantity = 0;
+let plusButton;
+let minusButton;
+let counterElement = document.createElement('div');
+let totalOrderAmount = 0;
+// Добавьте переменную для отслеживания состояния формы
+let isRightBlockOpen = false;
+let isFormVisible = false;
+
+
 //Working categories
+let selectedProductId = null; // Добавлено для отслеживания выбранного товара
+
 function showCategories(){
   const parentElement = document.getElementById('left')
 
@@ -26,40 +38,138 @@ function showProducts(products, category){
   }
 }
 
-
-let isRightBlockOpen = false;
-
-function showRBlock(products){
+function showRBlock(products) {
   const parentElement = document.getElementById('right');
   parentElement.innerHTML = '';
 
   let element = document.createElement('div');
   let button = document.createElement('button');
-  button.textContent = 'Order product';
-  button.className = 'button-order'
-  element.className = 'dynamic-element'
+  let addButton = document.createElement('button');
+  let plusButton = document.createElement('span');
+  let minusButton = document.createElement('span');
+
+  button.textContent = 'choose a product';
+  button.className = 'button-order';
+  element.className = 'dynamic-element';
   element.innerHTML = `<div> <string> <span>Name:</span> ${products.name}</string> <br> <string> <span>Price: </span> $${products.price}</string> <br> <string> <span>Description:</span> ${products.description}</string></div>`;
   element.setAttribute('data-right-id', products.id);
 
+  addButton.textContent = 'Add to Card';
+  addButton.className = 'add-to-card-button';
+
+
+  plusButton.textContent = '+';
+  plusButton.className = 'plus-button';
+
+  minusButton.textContent = '-';
+  minusButton.className = 'minus-button';
+  
   parentElement.appendChild(element);
   element.append(button);
-  isRightBlockOpen = true;
+  element.append(addButton);
+  element.append(plusButton);
+  element.append(minusButton);
 
-  button.addEventListener('click', function(){
+  addButton.addEventListener('click', function(){
+    addButton.style.display = 'none';
+    plusButton.style.display = 'flex';
+    minusButton.style.display = 'flex';
+    updateCounter();
+    
+  });
+
+  
+  plusButton.addEventListener('click', function () {
+    selectedProductQuantity++;
+    updateTotalAmount(products.price);
+    updateCounter();
+    updateOrderSummary();
+  });
+  
+  minusButton.addEventListener('click', function () {
+    if (selectedProductQuantity > 0) {
+      selectedProductQuantity--;
+      updateTotalAmount(-products.price);
+      updateCounter();
+    }
+  });
+
+
+  // Создаем элемент и выводим
+  let orderSummaryElement = document.getElementById('orderSummary');
+
+  if (!orderSummaryElement) {
+    // Создаем элемент, если его еще нет
+    orderSummaryElement = document.createElement('div');
+    orderSummaryElement.id = 'orderSummary';
+    // Добавляем созданный элемент в нужное место в DOM (например, внутрь блока формы)
+    // Замените 'ваш-контейнер' на соответствующий селектор или id вашего контейнера
+    document.getElementById('showResultatForm').appendChild(orderSummaryElement);
+  }
+
+  function updateOrderSummary() {
+    // const orderSummaryElement = document.getElementById('orderSummary');
+    orderSummaryElement.textContent = `Total Order Amount: $${totalOrderAmount.toFixed(2)}`;
+  }
+
+
+
+
+  button.addEventListener('click', function () {
+
     button.style.display = 'none';
-    btn.style.display = 'flex';
+    button.style.display = 'flex';
     mainForm.style.display = 'flex';
     right.style.display = 'none'
-    showInfoForForm = element.innerHTML = `<div> <string> <span>Name:</span> ${products.name}</string> <br> <string> <span>Price: </span> $${products.price}</string> <br> <string> <span>Description:</span> ${products.description}</string></div>`;
+    // showInfoForForm = element.innerHTML = `<div> <string> <span>Name:</span> ${products.name}</string> <br> <string> <span>Price: </span> $${products.price}</string> <br> <string> <span>Description:</span> ${products.description}</string></div>`;
+    showInfoForForm = element.innerHTML = `<div>${products.name}</div>`;
+    showInfoForFormPrice = element.innerHTML = `<div> <br>Price: $${products.price}</div>`;
     titleForm.innerText = 'Information about your order';
-  });
-}
+    
+    
+    if (!isFormVisible) {
+      element.append(plusButton);
+      element.append(minusButton);
 
+      plusButton.style.display = 'inline-block';
+      minusButton.style.display = 'inline-block';
+      button.textContent = 'Order+';
+
+      const currentDateTime = new Date();
+      localStorage.setItem('orderDateTime', currentDateTime.toISOString());
+      // Начальное количество товаров при заказе
+      selectedProductQuantity = 1;
+      updateTotalAmount(products.price);
+      updateCounter();
+      updateOrderSummary()
+
+    } else {
+        // Если форма видима, скроем её
+        mainForm.style.display = 'none';
+    }
+    // Инвертируйте состояние
+    isFormVisible = !isFormVisible;
+  });
+
+  function updateTotalAmount(price) {
+    totalOrderAmount += price;
+    let totalElement = document.getElementById('spanAllBuy');
+    let currentTotal = parseFloat(totalElement.textContent.replace('$', '')) || 0;
+    let newTotal = currentTotal + price;
+    totalElement.textContent = `$${totalOrderAmount.toFixed(2)}`;
+    return totalOrderAmount;
+  };
+  
+  function updateCounter() {
+    let counterElement = document.querySelector('.dynamic-element div');
+    counterElement.textContent = `Count: ${selectedProductQuantity}`;
+  };
+}
 
 
 document.getElementById('left').addEventListener('click', event => {
   if(event.target.nodeName === 'DIV'){
-    const categoryKey = event.target.getAttribute('data-category');
+    let categoryKey = event.target.getAttribute('data-category');
     let centerBlockDiv = document.getElementById('center');
     centerBlockDiv.style.display = 'block';
     if(isRightBlockOpen){
@@ -69,7 +179,7 @@ document.getElementById('left').addEventListener('click', event => {
     }
     const categoryProducts = categories[categoryKey].products
     showProducts(categoryProducts, categoryKey);
-  }
+  };
 });
 
 
@@ -79,8 +189,28 @@ document.getElementById('center').addEventListener('click', event => {
   const categoryKey = event.target.getAttribute('data-category');
   const products = categories[categoryKey].products.find(products => products.id == productId);
   
+
+  // При выборе нового товара обнуляем количество
+  selectedProductQuantity = 0;
+  // Обновляем ID выбранного товара
+  selectedProductId = products.id;
   showRBlock(products);
 });
+
+function loadSelectedProduct() {
+  // Загружаем информацию о выбранном товаре из localStorage
+  selectedProductId = localStorage.getItem('selectedProductId');
+  if (selectedProductId) {
+    const categoryKey = 'books';  // Предположим, что книги выбраны по умолчанию
+    const products = categories[categoryKey].products.find(product => product.id == selectedProductId);
+    if (products) {
+      showRBlock(products);
+    }
+  }
+}
+
+// Загружаем выбранный товар при загрузке страницы
+loadSelectedProduct();
 
 document.getElementById('center').addEventListener('click', event => {
   if(event.target.nodeName === 'DIV'){
@@ -102,12 +232,9 @@ document.getElementById('left').addEventListener('click', event => {
 });
 
 
-
-
 //Валидность
 function validateForm() {
   const formElements = document.forms.mainForm.elements;
-
   const fullName = formElements.nameUser;
 
   if (fullName) {
@@ -123,7 +250,7 @@ function validateForm() {
       validationMessageUserName.innerText = 'Invalid input. Please enter only letters for name.';
       validationMessageUserName.classList.remove('userNameValueErrorMinFiveLetter');
       validationMessageUserName.classList.add('userNameValueErrorInvalidInput');
-      username.classList.remove ('invalid-element')
+      username.classList.remove('invalid-element')
       return;
     }
     if (/[0-9]+/.test(fullNameValueValid) || fullNameValueValid === '') {
@@ -158,7 +285,7 @@ function validateForm() {
     validationMessageUserCity.classList.add('validationMessageUserCityAllowed');
   }
 
-
+  
   //FormaValidUserMailNumber
   const quantityMailValue = document.getElementById('validationMessageMail');
   if (quantityMailValue){
@@ -224,56 +351,187 @@ function getCity (citys) {
 
   for (let i = 0; i < citys.length; i++) {
     if (citys[i].checked) {
-      selectedCities.push(citys[i].value)
+      selectedCities.push(citys[i].value);
     }
   };
 
   return selectedCities;
 }
 
-document.getElementById('btn').addEventListener('click', () => {
-  const formElements = document.forms.mainForm.elements;
-  const parentElementDiv = document.getElementById('showResultatForm');
-  console.log('click')
 
-  function showAddAnswer(label, value,) {
+
+
+
+// //Отлельная функция для работы с массивом значений
+// function convereArray (){
+//   // Получаем форму по её id
+// let myForm = document.getElementById('mainForm');
+
+// // Получаем коллекцию элементов управления формы
+// let formControls = mainForm.elements;
+
+// // Преобразуем коллекцию в массив
+// let formControlsArray = Array.from(formControls);
+
+// // Получаем массив значений
+// let valuesArray = formControlsArray.map(function(element) {
+//   return element.value;
+// });
+
+// console.log(valuesArray);
+// }
+
+// window.addEventListener('load', ()=>{
+//   console.log(localStorage.getItem('formsValue'));
+// });
+
+
+document.getElementById('btn').addEventListener('click', () => {
+  
+  const formElements = document.forms.mainForm.elements;
+  localStorage.setItem('formsValue', JSON.stringify(getFormValues(formElements)));
+  console.log(localStorage.getItem('formsValue'));
+  
+  function getFormValues(elements) {
+    const values = {};
+  
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+  
+      if (element.type === 'radio' && !element.checked) {
+        continue; // Пропускаем невыбранные радиокнопки
+      }
+  
+      if (element.type === 'checkbox') {
+        values[element.name] = element.checked;
+      } else {
+        values[element.name] = element.value;
+      }
+    }
+  
+    return values;
+  }
+  
+
+  // convereArray();
+
+  function showAddAnswer(label, value) {
     let spanElement = document.createElement('span');
     spanElement.innerHTML = `<h4>${label}:</h4><div>${value}</div>`;
-    parentElementDiv.appendChild(spanElement);
+    // parentElementDiv.appendChild(spanElement);
   }
     if (validateForm()){
-      // showResultatForm.style.display = 'flex';
+      document.activeElement.blur();
+      showResultatForm.style.display = 'none';
       mainForm.style.display = 'none';
       btn.style.display = 'none';
-  
-      showAddAnswer('Order information', showInfoForForm);
+
+      const savedOrderDateTime = localStorage.getItem('orderDateTime');
+      if (savedOrderDateTime) {
+        const orderDateTime = new Date(savedOrderDateTime);
+        showAddAnswer('Order Date and Time', orderDateTime.toLocaleString());
+      };
     
-      showAddAnswer('Full Name User', formElements.nameUser.value);
-    
-      showAddAnswer('City Usera', formElements.citys.value);
-    
-      showAddAnswer('Number mail User', formElements.numberMail.value);
-    
-      showAddAnswer('Pay', formElements.pay.value);
-    
-      showAddAnswer('Quantity', formElements.numberQuantity.value);
-  
-      showAddAnswer('Comment', formElements.commet.value);
-      console.log('click 3')
+
+      showAddAnswer('Order information',showInfoForForm);
+      // showAddAnswer('Full Name User', formElements.nameUser.value);
+      // showAddAnswer('City Usera', formElements.citys.value);
+      // showAddAnswer('Number mail User', formElements.numberMail.value);
+      // showAddAnswer('Pay', formElements.pay.value);
+      // showAddAnswer('Quantity', formElements.numberQuantity.value);
+      // showAddAnswer('Comment', formElements.commet.value);
+       // Display order date and time
     }
-  });
+    
+
+    document.getElementById('showData').addEventListener('click', () => {
+      showResultatForm.style.display = 'flex';
+      closeData.style.display = 'flex';
+      main.style.display = 'none';
+    });
+
+    document.getElementById('closeData').addEventListener('click', () => {
+      showResultatForm.style.display = 'none';
+      closeData.style.display = 'none';
+    });
+
+  console.log('valid Done');
+});
+
+// const closeButton = document.createElement('button');
+// closeButton.textContent = 'x';
+// closeButton.className = 'close-button';
+
+
+// Добавим обработчик события для закрытия формы
+document.getElementById('closebButton').addEventListener('click', () => {
+  const formElements = document.forms.mainForm.elements;
+
+  for (let i = 0; i < formElements.length; i++) {
+    formElements[i].blur();
+  }
+  document.getElementById('formMainPages').blur();
+
+
+  // document.getElementById('mainForm').blur();
+
+  formMainPages.style.display = 'none';
+
+  isFormVisible = false;
+
+  // Установим фокус на кнопку "Order product" после закрытия формы
+  document.getElementById('left').focus();
+});
 
 
 
-  closeData.style.display = 'none';
-  document.getElementById('showData').addEventListener('click', () => {
-    showResultatForm.style.display = 'flex';
-    closeData.style.display = 'flex';
-  });
-  document.getElementById('closeData').addEventListener('click', () => {
-    showResultatForm.style.display = 'none';
-    closeData.style.display = 'none';
-  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
